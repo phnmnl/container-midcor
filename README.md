@@ -1,4 +1,4 @@
-![Logo](https://github.com/seliv55/midcor/text4217.png)
+![Logo](text4217.png)
 
 # MIDcor
 Version: 1.0
