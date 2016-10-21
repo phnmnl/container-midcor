@@ -69,13 +69,13 @@ sudo docker build -t midcor:0.1 .
 
  # To run MIDcor independently: standing in the MIDcor directory inside R environment, after reading the sources execute the command:
  
- ''' run_midcor("input_file","output_file")  '''
+  ''' run_midcor("input_file","output_file")  '''
  
  # here input file should be in Metabolights format, as is shown in the screenshot
  
  # To run MIDcor as a docker image, execute
  
- '''  sudo docker run -i -t -v $PWD:/data midcor:0.1 -i /data/input.csv -o /data/output.csv '''
+  '''  sudo docker run -i -t -v $PWD:/data midcor:0.1 -i /data/input.csv -o /data/output.csv '''
 
  # An example of input file is provided as "outin.csv"
 
