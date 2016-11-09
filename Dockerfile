@@ -11,7 +11,8 @@ RUN apt-get -y update && apt-get -y install libssl-dev libcurl4-openssl-dev git 
 
 # Add scripts folder to container
 ADD scripts/runMidcor.R /usr/bin/runMidcor.R
-
+ADD scripts/runTest1.sh /usr/bin/runTest1.sh
+RUN chmod +x /usr/bin/runTest1.sh
 # Add automatic repo finder for R:
 RUN echo 'options("repos"="http://cran.rstudio.com")' >> /etc/R/Rprofile.site
 
