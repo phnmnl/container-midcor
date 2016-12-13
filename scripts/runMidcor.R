@@ -13,7 +13,7 @@ opt<-parse_args(parser,positional_arguments = FALSE)
 if(!("input" %in% names(opt)) || !("output" %in% names(opt)) ) {
   print("no argument given!")
   print_help(parser)
-  q(status = 1,save = "no")
+  q(status = 0,save = "no")
 }
 
 library(midcor)
