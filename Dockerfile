@@ -1,8 +1,10 @@
 # PhenoMeNal H2020
-
 FROM r-base:3.3.1
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
+
+LABEL software.version="1.0"
+LABEL version="0.1"
 
 RUN apt-get -y update && apt-get -y --allow-downgrades install libssl-dev \
                                     libcurl4-openssl-dev=7.50.1-1 git \
