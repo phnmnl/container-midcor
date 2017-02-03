@@ -18,7 +18,7 @@ RUN apt-get -y update && apt-get -y --no-install-recommends install r-base r-bas
                                     libssh2-1-dev && \
     echo 'options("repos"="http://cran.rstudio.com")' >> /etc/R/Rprofile.site && \
     R -e "install.packages(c('devtools', 'optparse'))" && \
-    R -e 'library(devtools); install_github("seliv55/MIDcor_wf",ref=Sys.getenv("MIDCOR_REVISION")[1])' && \
+    R -e 'library(devtools); install_github("seliv55/midcor",ref=Sys.getenv("MIDCOR_REVISION")[1])' && \
     R -e "remove.packages(c('devtools'))" && \
     apt-get purge -y git r-base-dev libssl-dev libcurl4-openssl-dev libssh2-1-dev && \
     apt-get clean && apt-get autoremove -y && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/*
