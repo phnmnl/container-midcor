@@ -1,7 +1,9 @@
 ![Logo](text4217.png)
 
 # MIDcor
+
 Version: 1.0
+
 ## Short Description
 
 “R”-program that corrects 13C mass isotopomers spectra of metabolites for natural occurring isotopes and peaks overlapping
@@ -40,11 +42,11 @@ Version: 1.0
 
 ## Tool Authors
 
-- Vitaly Selivanov (Universitat de Barcelona)
+- [Vitaly Selivanov (Universitat de Barcelona)](https://github.com/seliv55)
 
 ## Container Contributors
 
-- [Pablo Moreno](EBI)
+- [Pablo Moreno (EMBL-EBI)](https://github.com/pcm32)
 
 ## Website
 
@@ -54,37 +56,33 @@ Version: 1.0
 
 - https://github.com/seliv55/midcor
 
-## Installation
+## Installation  
+  
+To create the Docker container: 
+  - go to the directory where the dockerfile is;
+  - create container from dockerfile:
 
-- 1) As independent program. MIDcor itself does not require installation. Standing in the MIDcor directory enter in R environment with the command:
-  
-'''  R '''
-  
- read the necessary functions:
-  
-''' source("lib.R")
-  
-source("midcor.R")'''
-  
-  
-- 2) Docker image. To create the Docker container: 
-        - go to the directory where the dockerfile is;
-        - create container from dockerfile:
-''' sudo docker build -t midcor:0.1 . '''
+```
+docker build -t midcor:0.1 .
+```
+
+Alternatively, pull directly from the repo 
+
+```
+docker pull container-registry.phenomenal-h2020.eu/phnmnl/midcor
+```
+
 
 ## Usage Instructions
 
-  To run MIDcor independently: standing in the MIDcor directory inside R environment, after reading the sources execute the command:
+To run MIDcor as a docker image, execute
  
- ''' run_midcor("input_file","output_file")  '''
- 
- here input file should be in Metabolights format, as is shown in the screenshot
- 
- To run MIDcor as a docker image, execute
- 
- '''  sudo docker run -i -t -v $PWD:/data midcor:0.1 -i /data/input.csv -o /data/output.csv '''
+```
+docker run -it -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/midcor -i /data/input.csv -o /data/output.csv
+```
 
- An example of input file is provided as "outin.csv"
+An example of input file is provided as "outin.csv"
 
 ## Publications
+
 - “MIDcor”, an R-program for deciphering mass interferences in mass spectra of metabolites enriched in stable isotopes. Submitted to BMC bioinformatics.
