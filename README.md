@@ -63,7 +63,7 @@ To create the Docker container:
   - create container from dockerfile:
 
 ```
-docker build -t midcor:0.1 .
+docker build -t midcor:0.2 .
 ```
 
 Alternatively, pull directly from the repo 
@@ -81,8 +81,22 @@ To run MIDcor as a docker image, execute
 docker run -it -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/midcor -i /data/input.csv -o /data/output.csv
 ```
 
-An example of input file is provided as "outin.csv"
+To run MIDcor as a docker image created locally:
+
+- using an example of monopeak CDF files, execute
+
+```
+docker run -it -v $PWD:/data midcor:0.2 -i /data/ramidout.csv -o /data/midcorout.csv 
+```
+- using an example of multipeaks CDF files, execute
+ 
+```
+docker run -it -v $PWD:/data midcor:0.2 -i /data/cdf2midout.csv -o /data/midcorout.csv 
+```
 
 ## Publications
 
-- “MIDcor”, an R-program for deciphering mass interferences in mass spectra of metabolites enriched in stable isotopes. Submitted to BMC bioinformatics.
+- Selivanov VA, Benito A, Miranda A, Aguilar E, Polat IH, Centelles JJ, Jayaraman A, Lee PW, Marin S, Cascante M. MIDcor, an R-program for deciphering
+mass interferences in mass spectra of metabolites enriched in stable isotopes. BMC Bioinformatics. 2017, 18:88. doi: 10.1186/s12859-017-1513-3. PubMed
+PMID: 28158972.
+

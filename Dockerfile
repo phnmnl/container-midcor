@@ -7,7 +7,7 @@ LABEL software.version="1.0"
 LABEL version="0.2"
 LABEL software=MIDcor
 
-ENV MIDCOR_REVISION "f78167573303b97ae9fb1849549965fc6ba53fac"
+ENV MIDCOR_REVISION "79a72afb4dcc092bfe347b292aeb4d8e0d044362"
 
 # Setup package repos
 RUN echo "deb http://cloud.r-project.org/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list
