@@ -1,5 +1,5 @@
 # PhenoMeNal H2020
-FROM ubuntu:16.04
+FROM container-registry.phenomenal-h2020.eu/phnmnl/rbase:v3.4.1-1xenial0_cv0.2.12
 
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
@@ -15,10 +15,7 @@ LABEL tags="Metabolomics"
 ENV MIDCOR_REVISION "79a72afb4dcc092bfe347b292aeb4d8e0d044362"
 
 # Setup package repos
-RUN echo "deb http://cloud.r-project.org/bin/linux/ubuntu xenial/" >> /etc/apt/sources.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-
-RUN apt-get -y update && apt-get -y --no-install-recommends install r-base r-base-dev libssl-dev \
+RUN apt-get -y update && apt-get -y --no-install-recommends install r-base-dev libssl-dev \
                                     libcurl4-openssl-dev git \
                                     libssh2-1-dev && \
     echo 'options("repos"="http://cran.rstudio.com")' >> /etc/R/Rprofile.site && \

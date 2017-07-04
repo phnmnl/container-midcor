@@ -4,6 +4,11 @@ apt-get update -y && apt-get install -y --no-install-recommends wget ca-certific
 
 wget "https://drive.google.com/uc?export=download&id=0B7S2ZMhdzWwbX3dnc1Z3WWhTak0" -O midcor_outin_input.csv
 runMidcor.R -i midcor_outin_input.csv -o output.csv
+rc=$?; 
+if [[ $rc != 0 ]]; then 
+	echo "R process failed with error $rc"
+	exit $rc; 
+fi
 
 if [ ! -f output.csv ]; then
    	echo "File output.csv does not exist, failing test."
