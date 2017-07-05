@@ -28,9 +28,7 @@ RUN apt-get -y update && apt-get -y --no-install-recommends install r-base-dev l
 # Add scripts folder to container
 ADD scripts/runMidcor.R /usr/bin/runMidcor.R
 ADD scripts/runTest1.sh /usr/bin/runTest1.sh
-ADD scripts/runTest2.sh /usr/bin/runTest2.sh
 RUN chmod +x /usr/bin/runTest1.sh
 RUN chmod +x /usr/bin/runMidcor.R
-RUN chmod +x /usr/bin/runTest2.sh
 # Define Entry point script
 ENTRYPOINT ["runMidcor.R"]
