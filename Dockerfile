@@ -4,7 +4,7 @@ FROM container-registry.phenomenal-h2020.eu/phnmnl/rbase:v3.4.1-1xenial0_cv0.2.1
 MAINTAINER PhenoMeNal-H2020 Project ( phenomenal-h2020-users@googlegroups.com )
 
 LABEL software.version="1.0"
-LABEL version="0.3"
+LABEL version="1.0"
 LABEL software="MIDcor"
 LABEL description="Corrects 13C mass isotopomers spectra of metabolites for natural occurring isotopes and peaks overlapping."
 LABEL website="https://github.com/seliv55/midcor"
