@@ -63,7 +63,7 @@ To create the Docker container:
   - create container from dockerfile:
 
 ```
-docker build -t midcor:0.2 .
+docker build -t midcor:0.3 .
 ```
 
 Alternatively, pull directly from the repo 
@@ -86,12 +86,22 @@ To run MIDcor as a docker image created locally:
 - using an example of monopeak CDF files, execute
 
 ```
-docker run -it -v $PWD:/data midcor:0.2 -i /data/ramidout.csv -o /data/midcorout.csv 
+docker run -it -v $PWD:/data midcor:0.3 -i /data/ramidout.csv -o /data/midcorout.csv 
 ```
 - using an example of multipeaks CDF files, execute
  
 ```
-docker run -it -v $PWD:/data midcor:0.2 -i /data/cdf2midout.csv -o /data/midcorout.csv 
+docker run -it -v $PWD:/data midcor:0.3 -i /data/cdf2midout.csv -o /data/midcormulti.csv 
+```
+- run test1 using the data that are in the file "ramidout.csv" in https://drive.google.com/drive/folders/0B1lAg6jyw6lvSlphUi1mdlUwUXM
+ 
+```
+docker run -it --entrypoint=runTest1.sh midcor:0.3 
+```
+- run test2 using the data that are in the file "cdf2midout.csv" in https://drive.google.com/drive/folders/0B1lAg6jyw6lvSlphUi1mdlUwUXM
+ 
+```
+docker run -it --entrypoint=runTest2.sh midcor:0.3 
 ```
 
 ## Publications
