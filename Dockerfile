@@ -21,7 +21,6 @@ RUN apt-get -y update && apt-get -y --no-install-recommends install r-base-dev l
     echo 'options("repos"="https://cran.rediris.es/")' >> /etc/R/Rprofile.site && \
     R -e "install.packages(c('devtools', 'optparse'))" && \
     R -e 'library(devtools); install_github("seliv55/midcor",ref=Sys.getenv("MIDCOR_REVISION")[1])' && \
-    R -e "remove.packages(c('devtools'))" && \
     apt-get purge -y git r-base-dev libssl-dev libcurl4-openssl-dev libssh2-1-dev && \
     apt-get clean && apt-get autoremove -y && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/*
 
