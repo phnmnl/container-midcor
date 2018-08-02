@@ -67,7 +67,7 @@ For advanced Docker usage:
 - Create container from dockerfile:
 
 ```
-docker build -t midcor:0.3 .
+sudo docker build -t midcor:0.3 .
 ```
 
 Alternatively, pull directly from the repo 
@@ -84,7 +84,7 @@ On a PhenoMeNal Cloud Research Environment, go to Fluxomics tool category, and t
 To run MIDcor as a docker image, execute
  
 ```
-docker run -it -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/midcor -i /data/input.csv -o /data/output.csv
+sudo docker run -it -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/midcor -i /data/input.csv -o /data/output.csv
 ```
 
 To run MIDcor as a docker image created locally:
@@ -92,22 +92,22 @@ To run MIDcor as a docker image created locally:
 - using an example of monopeak CDF files, execute
 
 ```
-docker run -it -v $PWD:/data midcor:0.3 -i /data/ramidout.csv -o /data/midcorout.csv 
+sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/ramidout.csv -o /data/midcorout.csv 
 ```
 - using an example of multipeaks CDF files, execute
  
 ```
-docker run -it -v $PWD:/data midcor:0.3 -i /data/cdf2midout.csv -o /data/midcormulti.csv 
+sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/cdf2midout.csv -o /data/midcormulti.csv 
 ```
 - run test1 using the data that are in the file "ramidout.csv" in https://drive.google.com/drive/folders/0B1lAg6jyw6lvSlphUi1mdlUwUXM
  
 ```
-docker run -it --entrypoint=runTest1.sh midcor:0.3 
+sudo docker run -it --entrypoint=runTest1.sh midcor:0.3 
 ```
 - run test2 using the data that are in the file "cdf2midout.csv" in https://drive.google.com/drive/folders/0B1lAg6jyw6lvSlphUi1mdlUwUXM
  
 ```
-docker run -it --entrypoint=runTest2.sh midcor:0.3 
+sudo docker run -it --entrypoint=runTest1.sh midcor:0.3 
 ```
 
 ## Publications
