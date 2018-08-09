@@ -12,7 +12,7 @@ LABEL documentation="https://github.com/phnmnl/container-midcor/blob/master/READ
 LABEL license="https://github.com/phnmnl/container-midcor/blob/develop/License.txt"
 LABEL tags="Metabolomics"
 
-ENV MIDCOR_REVISION "38c2a8f2e89892df92bebf1dc01c54b8c4948270"
+ENV MIDCOR_REVISION "ed2711b6e15b807eb27bf0e4739d707bcf55b6cf"
 
 # Setup package repos
 RUN apt-get -y update && apt-get -y --no-install-recommends install r-base-dev libssl-dev \
