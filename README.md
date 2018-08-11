@@ -10,7 +10,7 @@ Version: 1.0
 
 ## Description
 
-“midcor.R” is an “R”-program that performs a primary analysis of isotopic isomers (isotopomers) distribution obtained by Gas Cromatography coupled with Mass Spectrometry (GCMS). The aim of this analysis is to have a correct distribution of isotopes originated from substrates that are artificially enriched with specific isotopes (usually 13C). To this end the program performs a correction for naturally occurring isotopes and also correction for “impurities” of the assay media that give peaks overlapping with the spectra of analyzed labeled metabolites. This program offers two ways of corrections of “impurities” resulted from overlapping the assayed mass isotopomer distribution with peaks produced either by unknown metabolites in the media, or by different fragments produced by the assayed metabolite. The rsult of such a correction is saved using the format convenient for including into the database Metabolights.
+“Midcor” is an “R”-program that corrects for naturally occurring isotopes raw isotopic isomers (isotopomers) distribution in intracellular metabolites, when substrates artificially enriched with specific isotopes (usually 13C) are used. The program performs also correction for “impurities” of the assay media that give peaks overlapping with the spectra of analyzed labeled metabolites. The rsult of such a correction is saved using the format convenient for including into the database Metabolights.
 <p> In addition to this main functionality Midcor docker container is supplemented by functions that prepare the corrected mass isotopomer distributions (MID) of metabolites for the simulation of MID dynamics with our software Isodyn. These functions transform the format of output file to make it convenient for manual selection of good samples, and, for selected samples, calculate the mean and standard deviation for the peaks of MID. These values are used then for simulation with Isodyn.</p>
 
 ## Key features
@@ -80,21 +80,21 @@ docker pull container-registry.phenomenal-h2020.eu/phnmnl/midcor
 
 ## Usage Instructions
 
-To perform the correction of raw MID using docker image contained in PhenoMeNal registry, execute
+- To perform the correction of raw MID using docker image contained in PhenoMeNal registry, execute
  
 ```
 sudo docker run -it -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/midcor -i /data/[input_file] -o /data/[output_file]
 ```
-Here the path to the local current working directory ($PWD) is assigned for the docker image as "/data", [input_file] and [output_file] are paths to the input and output files relative to the $PWD.
+Here the path to the local current working directory ($PWD) is assigned for the docker image as "/data", [input_file] and [output_file] are paths to the input and output files relative to the $PWD (/data).
 
-To run MIDcor as a docker image created locally:
+- To run MIDcor as a docker image created locally:
 
 ```
 sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/[input_file] -o /data/[output_file] 
 ```
 Three examples of input files are provided in https://github.com/seliv55/midcor. These examples are "ramidout.csv", "cdf2midout.csv", "exam2ou.csv".
 
-- run test1 using the data that are in the file "ramidout.csv" in https://drive.google.com/drive/folders/0B1lAg6jyw6lvSlphUi1mdlUwUXM
+- To run test1 using the data that are in the file "ramidout.csv" in https://drive.google.com/drive/folders/0B1lAg6jyw6lvSlphUi1mdlUwUXM
  
 ```
 sudo docker run -it --entrypoint=runTest1.sh midcor:0.3 
@@ -110,7 +110,7 @@ After the correction is done the next two steps should be performed to use isody
 sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/[output_file] -c /data/[converted_file] 
 ```
 Here the option "-c" states for converting the obtained in the previous step file [output_file], formatted for Metabolights, into a file [converted_file] for easy visual selection of good samples.
-2. Calculating the mean and standard deviations for the peaks of MID in the samples after their manual selection.
+<p>2. Calculating the mean and standard deviations for the peaks of MID in the samples after their manual selection.</p>
 ```
 sudo docker run -it -v $PWD:/data midcor:0.3 -s /data/[converted_file] -d /data/[isodyn_input_file] 
 ```
