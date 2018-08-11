@@ -110,7 +110,9 @@ After the correction is done the next two steps should be performed to use isody
 sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/[output_file] -c /data/[converted_file] 
 ```
 Here the option "-c" states for converting the obtained in the previous step file [output_file], formatted for Metabolights, into a file [converted_file] for easy visual selection of good samples.
-<p>2. Calculating the mean and standard deviations for the peaks of MID in the samples after their manual selection.</p>
+
+2. Calculating the mean and standard deviations for the peaks of MID in the samples after their manual selection.
+
 ```
 sudo docker run -it -v $PWD:/data midcor:0.3 -s /data/[converted_file] -d /data/[isodyn_input_file] 
 ```
