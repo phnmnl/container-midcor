@@ -10,7 +10,8 @@ Version: 1.0
 
 ## Description
 
-“midcor.R” is an “R”-program that performs a primary analysis of isotopic isomers (isotopomers) distribution obtained by Gas Cromatography coupled with Mass Spectrometry (GCMS). The aim of this analysis is to have a correct distribution of isotopes originated from substrates that are artificially enriched with specific isotopes (usually 13C). To this end the program performs a correction for natural occurring isotopes and also correction for “impurities” of the assay media that give peaks overlapping with the spectra of analyzed labeled metabolites. This program offers two ways of corrections of “impurities” resulted from overlapping the assayed mass isotopomer distribution with peaks produced either by unknown metabolites in the media, or by different fragments produced by the assayed metabolite. 
+“midcor.R” is an “R”-program that performs a primary analysis of isotopic isomers (isotopomers) distribution obtained by Gas Cromatography coupled with Mass Spectrometry (GCMS). The aim of this analysis is to have a correct distribution of isotopes originated from substrates that are artificially enriched with specific isotopes (usually 13C). To this end the program performs a correction for naturally occurring isotopes and also correction for “impurities” of the assay media that give peaks overlapping with the spectra of analyzed labeled metabolites. This program offers two ways of corrections of “impurities” resulted from overlapping the assayed mass isotopomer distribution with peaks produced either by unknown metabolites in the media, or by different fragments produced by the assayed metabolite. The rsult of such a correction is saved using the format convenient for including into the database Metabolights.
+<p> In addition to this main functionality Midcor docker container is supplemented by functions that prepare the corrected mass isotopomer distributions (MID) of metabolites for the simulation of MID dynamics with our software Isodyn. These functions transform the format of output file to make it convenient for manual selection of good samples, and, for selected samples, calculate the mean and standard deviation for the peaks of MID. These values are used then for simulation with Isodyn.</p>
 
 ## Key features
 
@@ -79,26 +80,20 @@ docker pull container-registry.phenomenal-h2020.eu/phnmnl/midcor
 
 ## Usage Instructions
 
-On a PhenoMeNal Cloud Research Environment, go to Fluxomics tool category, and then click on midcor, and fill the expected input files, then press Run. Additionally, the tool can be used as part of a workflow with RaMID, Iso2flux and the Escher-Fluxomics tools. On a PhenoMeNal deployed CRE you should find as well a Fluxomics Stationary workflow, which includes MIDcor.
-
-To run MIDcor as a docker image, execute
+To perform the correction of raw MID using docker image contained in PhenoMeNal registry, execute
  
 ```
-sudo docker run -it -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/midcor -i /data/input.csv -o /data/output.csv
+sudo docker run -it -v $PWD:/data container-registry.phenomenal-h2020.eu/phnmnl/midcor -i /data/[input_file] -o /data/[output_file]
 ```
+Here the path to the local current working directory ($PWD) is assigned for the docker image as "/data", [input_file] and [output_file] are paths to the input and output files relative to the $PWD.
 
 To run MIDcor as a docker image created locally:
 
-- using an example of monopeak CDF files, execute
+```
+sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/[input_file] -o /data/[output_file] 
+```
+Three examples of input files are provided in https://github.com/seliv55/midcor. These examples are "ramidout.csv", "cdf2midout.csv", "exam2ou.csv".
 
-```
-sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/ramidout.csv -o /data/midcorout.csv 
-```
-- using an example of multipeaks CDF files, execute
- 
-```
-sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/cdf2midout.csv -o /data/midcormulti.csv 
-```
 - run test1 using the data that are in the file "ramidout.csv" in https://drive.google.com/drive/folders/0B1lAg6jyw6lvSlphUi1mdlUwUXM
  
 ```
@@ -109,6 +104,19 @@ sudo docker run -it --entrypoint=runTest1.sh midcor:0.3
 ```
 sudo docker run -it --entrypoint=runTest1.sh midcor:0.3 
 ```
+After the correction is done the next two steps should be performed to use isodyn for the subsequent analysis.
+1. Reformatting the data for convenient manual selection of good samples
+```
+sudo docker run -it -v $PWD:/data midcor:0.3 -i /data/[output_file] -c /data/[converted_file] 
+```
+Here the option "-c" states for converting the obtained in the previous step file [output_file], formatted for Metabolights, into a file [converted_file] for easy visual selection of good samples.
+2. Calculating the mean and standard deviations for the peaks of MID in the samples after their manual selection.
+```
+sudo docker run -it -v $PWD:/data midcor:0.3 -s /data/[converted_file] -d /data/[isodyn_input_file] 
+```
+Here the option "-s" indicates that the file [converted_file] obtained in the previous step is used for simple statistical calculations to find mean and standard deviations. The program saves these calculations in  [isodyn_input_file], which are used for Isodyn simulations. The option "-d" states for "directory", only the path to the directory (relative to $PWD) should be indicated, the file name the program construct as concatenation of names of cell line and tracer.
+
+On a PhenoMeNal Cloud Research Environment, go to Fluxomics tool category, and then click on midcor, and fill the expected input files, then press Run. Additionally, the tool can be used as part of a workflow with RaMID, Iso2flux and the Escher-Fluxomics tools. On a PhenoMeNal deployed CRE you should find as well a Fluxomics Stationary workflow, which includes MIDcor.
 
 ## Publications
 
